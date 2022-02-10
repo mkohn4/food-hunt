@@ -17,15 +17,7 @@ output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js'
 },
-plugins: [
-    new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
-    }),
-    new BundleAnalyzerPlugin({
-        analyzerMode: "static", //report outputs to an html file in the dist folder
-    })
-],
+
 module: {
     rules: [
         {
@@ -38,7 +30,7 @@ module: {
                         name (file) {
                             return "[path][name].[ext]"
                         },
-                        publicPath: function(url) {
+                        publicPath(url) {
                             return url.replace("../", "/assets/")
                         }
                     }
@@ -50,6 +42,15 @@ module: {
         }
     ]
 },
+plugins: [
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+    }),
+    new BundleAnalyzerPlugin({
+        analyzerMode: "static", //report outputs to an html file in the dist folder
+    })
+],
 mode: 'development'
 
 };
